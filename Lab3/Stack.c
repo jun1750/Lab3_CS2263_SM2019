@@ -67,7 +67,19 @@ int main(void)
  */
 Node_t *newNode(const char *value, Node_t *next)
 {
-    return NULL;
+    Node_t * node; //constructs pointer to the new node
+    char *copy = strdup(value); //mallocs the string value
+    node = (Node_t*)malloc(sizeof(Node_t));
+    if(node != NULL)
+    {
+        node->value = copy;
+        node->next = next;
+        return node;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 /**
@@ -77,7 +89,17 @@ Node_t *newNode(const char *value, Node_t *next)
  */
 Node_t *deleteNode(Node_t *current, char **value)
 {
-    return NULL;
+    //pass to the next node
+    if(current != NULL)
+    {
+        *value = current->value;
+        return current->next;
+        free(current);
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 /**
@@ -88,7 +110,15 @@ Node_t *deleteNode(Node_t *current, char **value)
  */
 bool pop(Node_t **Stack, char **value)
 {
-    return false;
+    if(*Stack != NULL)
+    {
+        *Stack = deleteNode(*Stack,value);
+        return true;
+    }
+    else
+    {
+        return false;
+    } 
 }
 
 /**
@@ -98,5 +128,11 @@ bool pop(Node_t **Stack, char **value)
  */
 bool push(Node_t **Stack, const char *value)
 {
+    *Stack = newNode(value, *Stack);
+    if(*Stack != NULL)
+    {
+        return true;
+    }
+
     return false;
 }
