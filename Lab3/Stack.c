@@ -93,9 +93,8 @@ Node_t *deleteNode(Node_t *current, char **value)
     if(current != NULL)
     {
         *value = current->value;
-        free(current);
         return current->next;
-        
+        free(current);
     }
     else
     {
